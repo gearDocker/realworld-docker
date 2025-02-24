@@ -1,0 +1,26 @@
+services:
+  api:
+    build: ./api
+    container_name: "realworld_api"
+    command: npm run start
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+    volumes:
+      - ./api/src:/app/src
+    depends_on:
+      - mongo_api
+  mongo_api:
+    image: mongo:latest
+    container_name: "realworld_mongo_api"
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_api_db:/data/db
+
+volumes:
+  mongo_api_db:
+    name: "realworld_mongo_api_db"

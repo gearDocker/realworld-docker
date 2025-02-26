@@ -2,7 +2,6 @@ import express from 'express';
 
 import { connectDB } from './helpers/connect_db.js';
 import { port } from './configurations/index.js';
-import { BookModel } from './model/book.model.js';
 
 const app = express();
 
@@ -11,21 +10,12 @@ app.get('', async (_, res) => {
 });
 
 app.get('/test', async (_, res) => {
-  res.send('Api server working');
+  res.send('Auth server working');
 });
 
 const startServer = () => {
   app.listen(port, async () => {
-    console.log(`Api server start on http://localhost:${port}`);
-    const book = new BookModel({
-      title: 'The Catcher in the Rye',
-      author: 'J.D. Salinger',
-      year: 1951,
-    });
-    await book.save();
-    /** get all books form bd */
-    const books = await BookModel.find({});
-    console.log(books);
+    console.log(`Auth server start on http://localhost:${port}`);
   });
 };
 

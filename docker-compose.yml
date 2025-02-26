@@ -8,24 +8,47 @@ services:
       - 3000:3000
     environment:
       - PORT=3000
-      - HOST=http://realworld-docker.com
       - MONGO_URL=mongodb://mongo_api:27017/api_db
     volumes:
       - ./api/src:/app/src
     depends_on:
       - mongo_api
-  # база данных к api
+
   mongo_api:
     image: mongo:latest
     container_name: 'realworld_mongo_api'
     restart: always
     ports:
       - 27017:27017
-    # environment:
-    # - MONGO_URL=mongodb://mongo_api:27017/api_db
     volumes:
       - mongo_api_db:/data/db
+
+  auth:
+    build: ./auth
+    container_name: 'realworld_auth'
+    command: npm run start
+    restart: always
+    ports:
+      - 3001:3000
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo_auth:27017/auth_db
+    volumes:
+      - ./auth/src/:/app/src
+    depends_on:
+      - mongo_auth
+  
+  mongo_auth:
+    image: mongo:latest
+    container_name: 'realworld_mongo_auth'
+    restart: always
+    ports:
+      - 27018:27017
+    volumes:
+      - mongo_auth_db:/data/db
 
 volumes:
   mongo_api_db:
     name: 'realworld_mongo_api_db'
+  mongo_auth_db:
+    name: 'realworld_mongo_auth_db'

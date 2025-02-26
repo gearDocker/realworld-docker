@@ -1,11 +1,24 @@
 services:
+  forntend:
+    build: ./frontend
+    container_name: 'realworld_frontend'
+    command: npm run dev
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - auth
+      - api
+
   api:
     build: ./api
     container_name: 'realworld_api'
     command: npm run start
     restart: always
     ports:
-      - 3000:3000
+      - 3001:3000
     environment:
       - PORT=3000
       - MONGO_URL=mongodb://mongo_api:27017/api_db
@@ -29,7 +42,7 @@ services:
     command: npm run start
     restart: always
     ports:
-      - 3001:3000
+      - 3002:3000
     environment:
       - PORT=3000
       - MONGO_URL=mongodb://mongo_auth:27017/auth_db

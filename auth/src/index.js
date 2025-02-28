@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { connectDB } from './helpers/connect_db.js';
+// TODO: to uppercase
 import { port } from './configurations/index.js';
 
 const app = express();
@@ -11,6 +12,13 @@ app.get('', async (_, res) => {
 
 app.get('/test', async (_, res) => {
   res.send('Auth server working');
+});
+
+app.get('/current', async (_, res) => {
+  res.json({
+    id: 1,
+    username: 'test',
+  });
 });
 
 const startServer = () => {

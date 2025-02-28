@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// TODO: to uppercase
 import { url } from '../configurations/index.js';
 
 export const connectDB = () => {

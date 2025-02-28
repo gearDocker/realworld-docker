@@ -1,11 +1,11 @@
 services:
-  forntend:
+  frontend:
     build: ./frontend
     container_name: 'realworld_frontend'
     command: npm run dev
     restart: always
-    ports:
-      - 3000:3000
+    # ports:
+      # - 3000:3000
     volumes:
       - ./frontend/src:/app/src
     depends_on:
@@ -59,6 +59,16 @@ services:
       - 27018:27017
     volumes:
       - mongo_auth_db:/data/db
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: 'realworld_nginx'
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - frontend
 
 volumes:
   mongo_api_db:

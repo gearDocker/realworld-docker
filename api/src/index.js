@@ -1,8 +1,7 @@
 import express from 'express';
 
 import { connectDB } from './helpers/connect_db.js';
-// TODO: to uppercase
-import { port, auth_url } from './configurations/index.js';
+import { PORT, AUTH_URL } from './configurations/index.js';
 import { BookModel } from './model/book.model.js';
 
 const app = express();
@@ -11,25 +10,37 @@ app.get('', async (_, res) => {
   res.redirect('/test');
 });
 
+/** Test api */
 app.get('/test', async (_, res) => {
   res.send('Api server working');
 });
 
+/** Send data to auth service */
+app.get('/data', async (_, res) => {
+  res.json({
+    id: 1,
+    data: {
+      data: new Date(),
+      message: 'message',
+    },
+  });
+});
+
+/** Get data from auth service */
 app.get('/user', async (_, res) => {
-  console.log('auth url :: ', `${auth_url}/current`);
-  fetch(`${auth_url}/current`)
+  fetch(`${AUTH_URL}/current`)
     .then((response) => response.json())
     .then((data) => {
       res.json({
-        url: auth_url,
+        url: AUTH_URL,
         user: data,
       });
     });
 });
 
 const startServer = () => {
-  app.listen(port, async () => {
-    console.log(`Api server start on http://localhost:${port}`);
+  app.listen(PORT, async () => {
+    console.log(`Api server start on http://localhost:${PORT}`);
     const book = new BookModel({
       title: 'The Catcher in the Rye',
       author: 'J.D. Salinger',

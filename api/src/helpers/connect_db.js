@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 
-// TODO: to uppercase
-import { url } from '../configurations/index.js';
+import { URL } from '../configurations/index.js';
 
 export const connectDB = () => {
   try {
-    mongoose.connect(url);
+    mongoose.connect(URL);
   } catch (err) {
     process.exit(1);
   }

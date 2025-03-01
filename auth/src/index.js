@@ -1,8 +1,7 @@
 import express from 'express';
 
 import { connectDB } from './helpers/connect_db.js';
-// TODO: to uppercase
-import { port } from './configurations/index.js';
+import { PORT, API_URL } from './configurations/index.js';
 
 const app = express();
 
@@ -10,10 +9,12 @@ app.get('', async (_, res) => {
   res.redirect('/test');
 });
 
+/** Test api */
 app.get('/test', async (_, res) => {
   res.send('Auth server working');
 });
 
+/** Send data to api service */
 app.get('/current', async (_, res) => {
   res.json({
     id: 1,
@@ -21,9 +22,20 @@ app.get('/current', async (_, res) => {
   });
 });
 
+/** Get data from api service */
+app.get('/some_data', async (_, res) => {
+  fetch(`${API_URL}/data`)
+    .then((response) => response.json())
+    .then((data) =>
+      res.json({
+        fromApi: data,
+      }),
+    );
+});
+
 const startServer = () => {
-  app.listen(port, async () => {
-    console.log(`Auth server start on http://localhost:${port}`);
+  app.listen(PORT, async () => {
+    console.log(`Auth server start on http://localhost:${PORT}`);
   });
 };
 

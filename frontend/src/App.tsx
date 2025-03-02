@@ -33,19 +33,13 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
       <div className="row">
         <button onClick={getUser}>
-          Get user from auth service
+          Get user from AUTH service
         </button>
         <button onClick={getData}>
-          Get data from api service
+          Get data from API service
         </button>
       </div>
     </>

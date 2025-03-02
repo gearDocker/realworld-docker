@@ -26,7 +26,7 @@ app.get('/api/data', async (_, res) => {
   });
 });
 
-/** Get data from auth service */
+/** Get user from auth service */
 app.get('/api/user', async (_, res) => {
   fetch(`${AUTH_URL}/current`)
     .then((response) => response.json())

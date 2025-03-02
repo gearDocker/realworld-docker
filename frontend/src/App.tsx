@@ -6,8 +6,14 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
-  const makeApiRequest = () => {
+  const getUser = () => {
     fetch('/api/user')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
+
+    const getData = () => {
+    fetch('/auth/some_data')
       .then(response => response.json())
       .then(data => console.log(data));
   }
@@ -34,9 +40,14 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <button onClick={makeApiRequest}>
-          Make api request
+      <div className="row">
+        <button onClick={getUser}>
+          Get user from auth service
         </button>
+        <button onClick={getData}>
+          Get data from api service
+        </button>
+      </div>
     </>
   )
 }

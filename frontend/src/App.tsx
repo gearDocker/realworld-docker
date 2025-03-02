@@ -6,6 +6,12 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const makeApiRequest = () => {
+    fetch('/api/user')
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }
+
   return (
     <>
       <div>
@@ -28,6 +34,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={makeApiRequest}>
+          Make api request
+        </button>
     </>
   )
 }

@@ -10,12 +10,12 @@ app.get('', async (_, res) => {
 });
 
 /** Test api */
-app.get('/test', async (_, res) => {
+app.get('/auth/test', async (_, res) => {
   res.send('Auth server working');
 });
 
 /** Send data to api service */
-app.get('/current', async (_, res) => {
+app.get('/auth/current', async (_, res) => {
   res.json({
     id: 1,
     username: 'test',
@@ -23,7 +23,7 @@ app.get('/current', async (_, res) => {
 });
 
 /** Get data from api service */
-app.get('/some_data', async (_, res) => {
+app.get('/auth/some_data', async (_, res) => {
   fetch(`${API_URL}/data`)
     .then((response) => response.json())
     .then((data) =>

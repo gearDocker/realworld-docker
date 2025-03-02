@@ -16,7 +16,7 @@ app.get('/test', async (_, res) => {
 });
 
 /** Send data to auth service */
-app.get('/data', async (_, res) => {
+app.get('/api/data', async (_, res) => {
   res.json({
     id: 1,
     data: {
@@ -27,7 +27,7 @@ app.get('/data', async (_, res) => {
 });
 
 /** Get data from auth service */
-app.get('/user', async (_, res) => {
+app.get('/api/user', async (_, res) => {
   fetch(`${AUTH_URL}/current`)
     .then((response) => response.json())
     .then((data) => {
